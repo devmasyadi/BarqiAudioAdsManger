@@ -1,0 +1,14 @@
+dependencies {
+    //anko
+    implementation 'org.jetbrains.anko:anko:0.10.8'
+    implementation 'org.jetbrains.anko:anko-design:0.10.8'
+
+    //koin
+    implementation 'org.koin:koin-core:2.1.5'
+    implementation 'org.koin:koin-android:2.1.5'
+
+    //koin
+    implementation 'org.koin:koin-core:2.1.5'
+    implementation 'org.koin:koin-android:2.1.5'
+
+}
