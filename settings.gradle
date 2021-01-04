@@ -1,4 +1,3 @@
-include ':unity-ads'
 include ':barqiaudioadsmanagerlib'
 include ':app'
 rootProject.name = "BarqiAudioAdsManager"
