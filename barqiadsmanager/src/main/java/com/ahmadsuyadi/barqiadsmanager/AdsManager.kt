@@ -25,7 +25,6 @@ class AdsManager(
         with(configAdsModel) {
             ConfigAds.isShowAds = isShowAds ?: false
             ConfigAds.isTestAds = isTestAds ?: false
-            ConfigAds.isShowImageAudio = isShowImageAudio ?: false
             ConfigAds.modeAds = modeAds ?: 1
             ConfigAds.idBannerAdMob = idBannerAdmob ?: ""
             ConfigAds.idInterstitialAdMob = idIntAdmob ?: ""
@@ -43,10 +42,6 @@ class AdsManager(
             ConfigAds.appLovinInter = appLovinInter ?: ""
             ConfigAds.appLovinBanner = appLovinBanner ?: ""
             ConfigAds.intervalInt = intervalInt ?: 1
-            ConfigAds.isOnRedirect = isOnRedirect ?: false
-            ConfigAds.urlRedirect = urlRedirect ?: ""
-            ConfigAds.urlMoreApp = urlMoreApp ?: ""
-            ConfigAds.privacyPolicyApp = privacyPolicyApp ?: ""
         }
     }
 
