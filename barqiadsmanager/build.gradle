@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
 }
 
@@ -8,13 +8,13 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.ahmadsuyadi.barqiaudioadsmanager"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -32,14 +32,29 @@ android {
     }
 }
 
+
 dependencies {
-    implementation project(':barqiadsmanager')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //anko
+    implementation 'org.jetbrains.anko:anko:0.10.8'
+    implementation 'org.jetbrains.anko:anko-design:0.10.8'
+
+    //koin
+    implementation 'org.koin:koin-core:2.1.5'
+    implementation 'org.koin:koin-android:2.1.5'
+
+    implementation 'com.github.Unity-Technologies:unity-ads-android:3.5.1'
+    implementation 'com.google.android.gms:play-services-ads:19.6.0'
+    implementation 'com.facebook.android:audience-network-sdk:6.1.0'
+    implementation 'com.startapp:inapp-sdk:4.6.3'
+    implementation('com.mopub:mopub-sdk-banner:5.15.0') {transitive = true}
+    implementation('com.mopub:mopub-sdk-fullscreen:5.15.0') {transitive = true}
+    implementation "com.applovin:applovin-sdk:9.14.12"
 }
