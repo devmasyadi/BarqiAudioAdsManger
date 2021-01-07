@@ -30,11 +30,12 @@ class FanAds(private val context: Context) : IFan, AudienceNetworkAds.InitListen
         }
         interstitialAd = InterstitialAd(context, ConfigAds.fanInter)
         interstitialAd?.loadAd(
-                interstitialAd!!
-                        .buildLoadAdConfig()
-                        .withAdListener(interstitialListener)
-                        .withCacheFlags(EnumSet.of(CacheFlag.VIDEO))
-                        .build())
+            interstitialAd!!
+                .buildLoadAdConfig()
+                .withAdListener(interstitialListener)
+                .withCacheFlags(EnumSet.of(CacheFlag.VIDEO))
+                .build()
+        )
     }
 
     override fun initData() {
@@ -48,7 +49,8 @@ class FanAds(private val context: Context) : IFan, AudienceNetworkAds.InitListen
         bannerAdView?.let { nonNullBannerAdView ->
             adView.addView(nonNullBannerAdView)
             nonNullBannerAdView.loadAd(
-                    nonNullBannerAdView.buildLoadAdConfig().withAdListener(bannerListener).build())
+                nonNullBannerAdView.buildLoadAdConfig().withAdListener(bannerListener).build()
+            )
         }
     }
 

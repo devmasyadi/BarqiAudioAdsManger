@@ -13,7 +13,8 @@ import com.unity3d.services.banners.UnityBannerSize
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class MyUnityAds(private val context: Context) : IUnityAds, IUnityAdsListener, BannerView.IListener, AnkoLogger {
+class MyUnityAds(private val context: Context) : IUnityAds, IUnityAdsListener, BannerView.IListener,
+    AnkoLogger {
 
     private lateinit var activity: Activity
 

@@ -21,12 +21,17 @@ object ConfigAds {
     var mopubBanner = ""
     var mopubInter = ""
     var startAppId = ""
-    var urlMoreApp = ""
+    var appLovinInter = ""
+    var appLovinBanner = ""
     var privacyPolicyApp = ""
+    var urlMoreApp = ""
 
     //1 ADMOB
     //2 FAN
     //3 UNITY_ADS
+    //4 Mopub
+    //5 Startapp
+    //6 AppLovin
     var modeAds = 1
 
 }

@@ -1,7 +1,7 @@
 package com.ahmadsuyadi.barqiaudioadsmanager
 
 import android.app.Application
-import com.ahmadsuyadi.barqiaudioadsmanagerlib.di.adsModule
+import com.ahmadsuyadi.barqiaudioadsmanagerlib.di.barqiAdsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -15,7 +15,7 @@ class MyApplication: Application() {
         startKoin {
             androidLogger(Level.ERROR)
             androidContext(this@MyApplication)
-            modules(adsModule)
+            modules(barqiAdsModule)
         }
 
     }

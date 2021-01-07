@@ -22,8 +22,8 @@ class MopubAds(private val context: Context) : IMopub, AnkoLogger {
 
     override fun initialize() {
         sdkConfiguration = SdkConfiguration.Builder(ConfigAds.mopubBanner)
-                .withLogLevel(if (BuildConfig.DEBUG) MoPubLog.LogLevel.DEBUG else MoPubLog.LogLevel.INFO)
-                .build()
+            .withLogLevel(if (BuildConfig.DEBUG) MoPubLog.LogLevel.DEBUG else MoPubLog.LogLevel.INFO)
+            .build()
         MoPub.initializeSdk(context, sdkConfiguration) {
             info("onInitializationFinished")
         }
@@ -65,7 +65,10 @@ class MopubAds(private val context: Context) : IMopub, AnkoLogger {
             info("onInterstitialShown")
         }
 
-        override fun onInterstitialFailed(interstitial: MoPubInterstitial?, errorCode: MoPubErrorCode?) {
+        override fun onInterstitialFailed(
+            interstitial: MoPubInterstitial?,
+            errorCode: MoPubErrorCode?
+        ) {
             info("onInterstitialFailed, errorCode : $errorCode")
         }
 
