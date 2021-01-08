@@ -1,5 +1,6 @@
 package com.ahmadsuyadi.barqiadsmanager.ads.startapp
 
+import android.app.Activity
 import android.content.Context
 import android.view.View
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
@@ -11,10 +12,13 @@ import com.startapp.sdk.adsbase.StartAppSDK
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class StartAppAds(private val context: Context) : IStartApp, AnkoLogger {
+class StartAppAds: IStartApp, AnkoLogger {
 
-    override fun initialize() {
-        StartAppSDK.init(context, ConfigAds.startAppId, true)
+    private lateinit var activity: Activity
+
+    override fun initialize(activity: Activity) {
+        this.activity = activity
+        StartAppSDK.init(activity, ConfigAds.startAppId, true)
         StartAppSDK.setTestAdsEnabled(ConfigAds.isTestAds);
     }
 
@@ -27,7 +31,7 @@ class StartAppAds(private val context: Context) : IStartApp, AnkoLogger {
     }
 
     override fun showInterstitial() {
-        StartAppAd.showAd(context);
+        StartAppAd.showAd(activity);
     }
 
     private val bannerListener = object : BannerListener {

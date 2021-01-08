@@ -1,5 +1,6 @@
 package com.ahmadsuyadi.barqiadsmanager.ads.mopub
 
+import android.app.Activity
 import android.content.Context
 import com.ahmadsuyadi.barqiadsmanager.BuildConfig
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
@@ -15,22 +16,26 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
 
-class MopubAds(private val context: Context) : IMopub, AnkoLogger {
+class MopubAds: IMopub, AnkoLogger {
 
     private lateinit var sdkConfiguration: SdkConfiguration
     private var mInterstitial: MoPubInterstitial? = null
+    private lateinit var activity: Activity
 
-    override fun initialize() {
+    override fun initialize(activity: Activity) {
+        this.activity = activity
         sdkConfiguration = SdkConfiguration.Builder(ConfigAds.mopubBanner)
             .withLogLevel(if (BuildConfig.DEBUG) MoPubLog.LogLevel.DEBUG else MoPubLog.LogLevel.INFO)
             .build()
-        MoPub.initializeSdk(context, sdkConfiguration) {
+        MoPub.initializeSdk(activity, sdkConfiguration) {
             info("onInitializationFinished")
         }
     }
 
     override fun initData() {
-
+        mInterstitial = MoPubInterstitial(activity, ConfigAds.mopubInter)
+        mInterstitial?.interstitialAdListener = interstitialAdListener
+        mInterstitial?.load()
     }
 
     override fun showBanner(moPubView: MoPubView) {
@@ -40,11 +45,6 @@ class MopubAds(private val context: Context) : IMopub, AnkoLogger {
             adSize = MoPubView.MoPubAdSize.HEIGHT_50
             loadAd(MoPubView.MoPubAdSize.HEIGHT_50)
             loadAd()
-        }
-        moPubView.context.activity()?.let {
-            mInterstitial = MoPubInterstitial(it, ConfigAds.mopubInter)
-            mInterstitial?.interstitialAdListener = interstitialAdListener
-            mInterstitial?.load()
         }
     }
 

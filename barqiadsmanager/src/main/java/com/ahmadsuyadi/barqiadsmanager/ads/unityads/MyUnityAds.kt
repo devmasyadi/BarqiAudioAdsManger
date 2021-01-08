@@ -13,13 +13,14 @@ import com.unity3d.services.banners.UnityBannerSize
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class MyUnityAds(private val context: Context) : IUnityAds, IUnityAdsListener, BannerView.IListener,
+class MyUnityAds: IUnityAds, IUnityAdsListener, BannerView.IListener,
     AnkoLogger {
 
     private lateinit var activity: Activity
 
-    override fun initialize() {
-        UnityAds.initialize(context, ConfigAds.unityGameID, ConfigAds.isTestAds)
+    override fun initialize(activity: Activity) {
+        this.activity = activity
+        UnityAds.initialize(activity, ConfigAds.unityGameID, ConfigAds.isTestAds)
     }
 
     override fun initData() {
@@ -27,9 +28,6 @@ class MyUnityAds(private val context: Context) : IUnityAds, IUnityAdsListener, B
     }
 
     override fun showBanner(adView: LinearLayout) {
-        adView.context.activity()?.let {
-            activity = it
-        }
         val bottomBanner = BannerView(activity, ConfigAds.unityBanner, UnityBannerSize(320, 50))
         bottomBanner.listener = this
         adView.addView(bottomBanner)

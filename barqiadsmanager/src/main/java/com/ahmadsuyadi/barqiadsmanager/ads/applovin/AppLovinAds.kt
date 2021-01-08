@@ -20,29 +20,26 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.pow
 
 
-class AppLovinAds(private val context: Context) : IAppLovin, AnkoLogger {
+class AppLovinAds : IAppLovin, AnkoLogger {
 
     private lateinit var interstitialAd: MaxInterstitialAd
     private var retryAttempt = 0.0
     private lateinit var activity: Activity
 
-    override fun initialize() {
-        AppLovinSdk.getInstance(context).mediationProvider = "max"
-        AppLovinSdk.getInstance(context).initializeSdk {
+    override fun initialize(activity: Activity) {
+        this.activity = activity
+        AppLovinSdk.getInstance(activity).mediationProvider = "max"
+        AppLovinSdk.getInstance(activity).initializeSdk {
             info("Success initialize appLovinAds")
         }
     }
 
     override fun initData() {
-
+        createInterstitialAd()
     }
 
     override fun showBanner(adView: LinearLayout) {
-        adView.context.activity()?.let {
-            activity = it
-        }
         createBannerAd(adView)
-        createInterstitialAd()
     }
 
     override fun showInterstitial() {

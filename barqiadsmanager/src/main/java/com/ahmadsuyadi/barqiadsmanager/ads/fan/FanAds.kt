@@ -1,5 +1,6 @@
 package com.ahmadsuyadi.barqiadsmanager.ads.fan
 
+import android.app.Activity
 import android.content.Context
 import android.widget.LinearLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
@@ -8,17 +9,18 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import java.util.*
 
-class FanAds(private val context: Context) : IFan, AudienceNetworkAds.InitListener, AnkoLogger {
+class FanAds: IFan, AudienceNetworkAds.InitListener, AnkoLogger {
 
     private var interstitialAd: InterstitialAd? = null
     private var bannerAdView: AdView? = null
+    private lateinit var activity: Activity
 
     override fun onInitialized(result: AudienceNetworkAds.InitResult?) {
         info("onInitialized FAN result : ${result?.message}")
     }
 
-    override fun initialize() {
-        AudienceNetworkAds.buildInitSettings(context).withInitListener(this).initialize()
+    override fun initialize(activity: Activity) {
+        AudienceNetworkAds.buildInitSettings(activity).withInitListener(this).initialize()
         AdSettings.setTestMode(ConfigAds.isTestAds)
         AdSettings.setIntegrationErrorMode(AdSettings.IntegrationErrorMode.INTEGRATION_ERROR_CRASH_DEBUG_MODE);
     }
@@ -28,7 +30,7 @@ class FanAds(private val context: Context) : IFan, AudienceNetworkAds.InitListen
             interstitialAd?.destroy()
             interstitialAd = null
         }
-        interstitialAd = InterstitialAd(context, ConfigAds.fanInter)
+        interstitialAd = InterstitialAd(activity, ConfigAds.fanInter)
         interstitialAd?.loadAd(
             interstitialAd!!
                 .buildLoadAdConfig()
@@ -45,7 +47,7 @@ class FanAds(private val context: Context) : IFan, AudienceNetworkAds.InitListen
     override fun showBanner(adView: LinearLayout) {
         bannerAdView?.destroy()
         bannerAdView = null
-        bannerAdView = AdView(context, ConfigAds.fanBanner, AdSize.BANNER_HEIGHT_50)
+        bannerAdView = AdView(activity, ConfigAds.fanBanner, AdSize.BANNER_HEIGHT_50)
         bannerAdView?.let { nonNullBannerAdView ->
             adView.addView(nonNullBannerAdView)
             nonNullBannerAdView.loadAd(
