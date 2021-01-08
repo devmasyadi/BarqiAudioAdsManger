@@ -52,6 +52,8 @@ class MopubAds(private val context: Context) : IMopub, AnkoLogger {
         mInterstitial?.let {
             if (it.isReady)
                 it.show()
+            else
+                it.load()
             info("showInterstitial is Ready : ${it.isReady}")
         }
     }
