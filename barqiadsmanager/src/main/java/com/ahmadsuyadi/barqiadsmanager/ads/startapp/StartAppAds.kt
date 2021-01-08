@@ -15,10 +15,12 @@ import org.jetbrains.anko.info
 class StartAppAds: IStartApp, AnkoLogger {
 
     private lateinit var activity: Activity
+    private lateinit var context: Context
 
     override fun initialize(activity: Activity) {
         this.activity = activity
-        StartAppSDK.init(activity, ConfigAds.startAppId, true)
+        context = activity.applicationContext
+        StartAppSDK.init(context, ConfigAds.startAppId, true)
         StartAppSDK.setTestAdsEnabled(ConfigAds.isTestAds);
     }
 
@@ -31,7 +33,7 @@ class StartAppAds: IStartApp, AnkoLogger {
     }
 
     override fun showInterstitial() {
-        StartAppAd.showAd(activity);
+        StartAppAd.showAd(context);
     }
 
     private val bannerListener = object : BannerListener {

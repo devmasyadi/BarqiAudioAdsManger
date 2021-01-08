@@ -1,6 +1,8 @@
 package com.ahmadsuyadi.barqiadsmanager
 
+import android.app.Activity
 import android.widget.LinearLayout
+import com.ahmadsuyadi.barqiadsmanager.ads.IAds
 import com.ahmadsuyadi.barqiadsmanager.ads.admob.AdmobAds
 import com.ahmadsuyadi.barqiadsmanager.ads.applovin.AppLovinAds
 import com.ahmadsuyadi.barqiadsmanager.ads.fan.FanAds
@@ -19,7 +21,7 @@ class AdsManager(
     private val mopubAds: MopubAds,
     private val startAppAds: StartAppAds,
     private val appLovinAds: AppLovinAds,
-) : AnkoLogger {
+): AnkoLogger {
 
     fun setUp(configAdsModel: ConfigAdsModel) {
         with(configAdsModel) {
@@ -45,17 +47,16 @@ class AdsManager(
         }
     }
 
-    fun initialize() {
+    fun initialize(activity: Activity) {
         if (ConfigAds.isShowAds)
             when (ConfigAds.modeAds) {
-                1 -> admobAds.initialize()
-                2 -> fanAds.initialize()
-                3 -> unityAds.initialize()
-                4 -> mopubAds.initialize()
-                5 -> startAppAds.initialize()
-                6 -> appLovinAds.initialize()
+                1 -> admobAds.initialize(activity)
+                2 -> fanAds.initialize(activity)
+                3 -> unityAds.initialize(activity)
+                4 -> mopubAds.initialize(activity)
+                5 -> startAppAds.initialize(activity)
+                6 -> appLovinAds.initialize(activity)
             }
-
     }
 
     fun initData() {

@@ -14,9 +14,11 @@ class AdmobAds : IAdmob, AnkoLogger {
     private lateinit var adRequest: AdRequest
     private lateinit var mInterstitialAd: InterstitialAd
     private lateinit var activity: Activity
+    private lateinit var context: Context
 
     override fun initialize(activity: Activity) {
         this.activity = activity
+        context = activity.applicationContext
         if (ConfigAds.isTestAds)
             MobileAds.setRequestConfiguration(
                 RequestConfiguration.Builder()
@@ -28,14 +30,14 @@ class AdmobAds : IAdmob, AnkoLogger {
 
     override fun initData() {
         adRequest = AdRequest.Builder().build()
-        mAdView = AdView(activity).apply {
+        mAdView = AdView(context).apply {
             adUnitId =
                 if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/6300978111" else ConfigAds.idBannerAdMob
             adSize = AdSize.BANNER
             info("adUnitId banner : $adUnitId")
         }
 
-        mInterstitialAd = InterstitialAd(activity).apply {
+        mInterstitialAd = InterstitialAd(context).apply {
             adUnitId =
                 if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/1033173712" else ConfigAds.idInterstitialAdMob
             info("adUnitId inter : $adUnitId")

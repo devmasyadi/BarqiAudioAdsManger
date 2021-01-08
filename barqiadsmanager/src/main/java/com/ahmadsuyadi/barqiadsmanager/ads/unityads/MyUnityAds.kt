@@ -13,62 +13,67 @@ import com.unity3d.services.banners.UnityBannerSize
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class MyUnityAds: IUnityAds, IUnityAdsListener, BannerView.IListener,
-    AnkoLogger {
+class MyUnityAds: IUnityAds, AnkoLogger {
 
     private lateinit var activity: Activity
+    private lateinit var context: Context
 
     override fun initialize(activity: Activity) {
         this.activity = activity
-        UnityAds.initialize(activity, ConfigAds.unityGameID, ConfigAds.isTestAds)
+        context = activity.applicationContext
+        UnityAds.initialize(context, ConfigAds.unityGameID, ConfigAds.isTestAds)
     }
 
     override fun initData() {
-        UnityAds.addListener(this)
+        UnityAds.addListener(iUnityAdsListener)
     }
 
     override fun showBanner(adView: LinearLayout) {
         val bottomBanner = BannerView(activity, ConfigAds.unityBanner, UnityBannerSize(320, 50))
-        bottomBanner.listener = this
+        bottomBanner.listener = bannerListener
         adView.addView(bottomBanner)
         bottomBanner.load()
+    }
+
+    private val iUnityAdsListener = object: IUnityAdsListener {
+        override fun onUnityAdsStart(placementId: String?) {
+            info("onUnityAdsStart placementId: $placementId")
+        }
+
+        override fun onUnityAdsFinish(placementId: String?, result: UnityAds.FinishState?) {
+            info("onUnityAdsFinish placementId: $placementId")
+        }
+
+        override fun onUnityAdsError(error: UnityAds.UnityAdsError?, message: String?) {
+            info("onUnityAdsError error: $error, message: $message")
+        }
+
+        override fun onUnityAdsReady(placementId: String?) {
+            info("onUnityAdsReady placementId: $placementId")
+        }
+    }
+
+    private val bannerListener = object: BannerView.IListener {
+        override fun onBannerLeftApplication(p0: BannerView?) {
+
+        }
+
+        override fun onBannerClick(p0: BannerView?) {
+
+        }
+
+        override fun onBannerLoaded(p0: BannerView?) {
+            info("onBannerLoaded")
+        }
+
+        override fun onBannerFailedToLoad(p0: BannerView?, p1: BannerErrorInfo?) {
+            info("onBannerFailedToLoad $p0, $p1")
+        }
     }
 
     override fun showInterstitial() {
         if (UnityAds.isReady(ConfigAds.unityInter))
             UnityAds.show(activity, ConfigAds.unityInter)
-    }
-
-    override fun onUnityAdsStart(placementID: String?) {
-        info("onUnityAdsStart placementID : $placementID")
-    }
-
-    override fun onUnityAdsFinish(placementId: String?, p1: UnityAds.FinishState?) {
-        info("onUnityAdsFinish placementID : $placementId")
-    }
-
-    override fun onUnityAdsError(error: UnityAds.UnityAdsError?, message: String?) {
-        info("onUnityAdsError error : $error, message : $message")
-    }
-
-    override fun onUnityAdsReady(placementId: String?) {
-        info("onUnityAdsReady placementId : $placementId")
-    }
-
-    override fun onBannerLeftApplication(p0: BannerView?) {
-
-    }
-
-    override fun onBannerClick(p0: BannerView?) {
-
-    }
-
-    override fun onBannerLoaded(p0: BannerView?) {
-        info("onBannerLoaded")
-    }
-
-    override fun onBannerFailedToLoad(p0: BannerView?, p1: BannerErrorInfo?) {
-        info("onBannerFailedToLoad")
     }
 
 }

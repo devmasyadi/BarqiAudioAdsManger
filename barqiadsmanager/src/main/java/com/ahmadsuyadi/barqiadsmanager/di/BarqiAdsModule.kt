@@ -11,12 +11,12 @@ import org.koin.dsl.module
 
 val barqiAdsModule = module {
 
-    single { AdmobAds(get()) }
-    single { MyUnityAds(get()) }
-    single { FanAds(get()) }
-    single { MopubAds(get()) }
-    single { StartAppAds(get()) }
-    single { AppLovinAds(get()) }
+    single { AdmobAds() }
+    single { MyUnityAds() }
+    single { FanAds() }
+    single { MopubAds() }
+    single { StartAppAds() }
+    single { AppLovinAds() }
 
     single {
         AdsManager(get(), get(), get(), get(), get(), get())

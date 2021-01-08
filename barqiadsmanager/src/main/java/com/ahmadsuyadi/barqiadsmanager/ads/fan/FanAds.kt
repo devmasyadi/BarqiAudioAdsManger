@@ -14,12 +14,15 @@ class FanAds: IFan, AudienceNetworkAds.InitListener, AnkoLogger {
     private var interstitialAd: InterstitialAd? = null
     private var bannerAdView: AdView? = null
     private lateinit var activity: Activity
+    private lateinit var context: Context
 
     override fun onInitialized(result: AudienceNetworkAds.InitResult?) {
         info("onInitialized FAN result : ${result?.message}")
     }
 
     override fun initialize(activity: Activity) {
+        this.activity = activity
+        context = activity.applicationContext
         AudienceNetworkAds.buildInitSettings(activity).withInitListener(this).initialize()
         AdSettings.setTestMode(ConfigAds.isTestAds)
         AdSettings.setIntegrationErrorMode(AdSettings.IntegrationErrorMode.INTEGRATION_ERROR_CRASH_DEBUG_MODE);
@@ -30,7 +33,7 @@ class FanAds: IFan, AudienceNetworkAds.InitListener, AnkoLogger {
             interstitialAd?.destroy()
             interstitialAd = null
         }
-        interstitialAd = InterstitialAd(activity, ConfigAds.fanInter)
+        interstitialAd = InterstitialAd(context, ConfigAds.fanInter)
         interstitialAd?.loadAd(
             interstitialAd!!
                 .buildLoadAdConfig()
@@ -47,7 +50,7 @@ class FanAds: IFan, AudienceNetworkAds.InitListener, AnkoLogger {
     override fun showBanner(adView: LinearLayout) {
         bannerAdView?.destroy()
         bannerAdView = null
-        bannerAdView = AdView(activity, ConfigAds.fanBanner, AdSize.BANNER_HEIGHT_50)
+        bannerAdView = AdView(context, ConfigAds.fanBanner, AdSize.BANNER_HEIGHT_50)
         bannerAdView?.let { nonNullBannerAdView ->
             adView.addView(nonNullBannerAdView)
             nonNullBannerAdView.loadAd(
