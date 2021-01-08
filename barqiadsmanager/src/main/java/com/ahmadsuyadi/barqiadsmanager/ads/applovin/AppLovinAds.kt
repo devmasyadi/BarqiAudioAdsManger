@@ -48,7 +48,8 @@ class AppLovinAds(private val context: Context) : IAppLovin, AnkoLogger {
     override fun showInterstitial() {
         if (interstitialAd.isReady) {
             interstitialAd.showAd();
-        }
+        } else
+            interstitialAd.loadAd()
     }
 
     private fun createInterstitialAd() {
