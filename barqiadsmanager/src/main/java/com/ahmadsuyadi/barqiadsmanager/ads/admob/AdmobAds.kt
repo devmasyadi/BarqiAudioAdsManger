@@ -4,11 +4,12 @@ import android.app.Activity
 import android.content.Context
 import android.widget.LinearLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
+import com.ahmadsuyadi.barqiadsmanager.ads.IAds
 import com.google.android.gms.ads.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class AdmobAds : IAdmob, AnkoLogger {
+class AdmobAds : IAds, AnkoLogger {
 
     private lateinit var adRequest: AdRequest
     private lateinit var mInterstitialAd: InterstitialAd
@@ -20,16 +21,17 @@ class AdmobAds : IAdmob, AnkoLogger {
         context = activity.applicationContext
         if (ConfigAds.isTestAds)
             MobileAds.setRequestConfiguration(
-                    RequestConfiguration.Builder()
-                            .setTestDeviceIds(listOf("DB312C879640DB1A1BA381031953D342"))
-                            .build()
+                RequestConfiguration.Builder()
+                    .setTestDeviceIds(listOf("DB312C879640DB1A1BA381031953D342"))
+                    .build()
             )
         MobileAds.initialize(activity) { info("onInitialize Admob") }
 
         adRequest = AdRequest.Builder().build()
 
         mInterstitialAd = InterstitialAd(context).apply {
-            adUnitId = if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/1033173712" else ConfigAds.idInterstitialAdMob
+            adUnitId =
+                if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/1033173712" else ConfigAds.idInterstitialAdMob
             loadAd(adRequest)
             adListener = object : AdListener() {
                 override fun onAdClosed() {
@@ -43,7 +45,8 @@ class AdmobAds : IAdmob, AnkoLogger {
 
     override fun showBanner(adView: LinearLayout) {
         val mAdView = AdView(context).apply {
-            adUnitId = if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/6300978111" else ConfigAds.idBannerAdMob
+            adUnitId =
+                if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/6300978111" else ConfigAds.idBannerAdMob
             adSize = AdSize.BANNER
         }
         with(mAdView) {

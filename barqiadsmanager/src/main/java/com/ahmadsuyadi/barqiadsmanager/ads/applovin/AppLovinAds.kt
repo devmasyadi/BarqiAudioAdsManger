@@ -3,6 +3,7 @@ package com.ahmadsuyadi.barqiadsmanager.ads.applovin
 import android.app.Activity
 import android.widget.LinearLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
+import com.ahmadsuyadi.barqiadsmanager.ads.IAds
 import com.applovin.mediation.MaxAd
 import com.applovin.mediation.MaxAdListener
 import com.applovin.mediation.MaxAdViewAdListener
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.pow
 
 
-class AppLovinAds : IAppLovin, AnkoLogger {
+class AppLovinAds : IAds, AnkoLogger {
 
     private lateinit var interstitialAd: MaxInterstitialAd
     private var retryAttempt = 0.0
@@ -79,7 +80,7 @@ class AppLovinAds : IAppLovin, AnkoLogger {
             // We recommend retrying with exponentially higher delays up to a maximum delay (in this case 64 seconds)
             retryAttempt++
             val delayMillis =
-                    TimeUnit.SECONDS.toMillis(2.0.pow(6.0.coerceAtMost(retryAttempt)).toLong())
+                TimeUnit.SECONDS.toMillis(2.0.pow(6.0.coerceAtMost(retryAttempt)).toLong())
 
             GlobalScope.launch {
                 delay(delayMillis)

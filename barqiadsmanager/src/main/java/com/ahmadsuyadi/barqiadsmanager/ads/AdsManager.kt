@@ -1,7 +1,8 @@
-package com.ahmadsuyadi.barqiadsmanager
+package com.ahmadsuyadi.barqiadsmanager.ads
 
 import android.app.Activity
 import android.widget.LinearLayout
+import com.ahmadsuyadi.barqiadsmanager.ConfigAds
 import com.ahmadsuyadi.barqiadsmanager.ads.admob.AdmobAds
 import com.ahmadsuyadi.barqiadsmanager.ads.applovin.AppLovinAds
 import com.ahmadsuyadi.barqiadsmanager.ads.fan.FanAds
@@ -9,16 +10,14 @@ import com.ahmadsuyadi.barqiadsmanager.ads.mopub.MopubAds
 import com.ahmadsuyadi.barqiadsmanager.ads.startapp.StartAppAds
 import com.ahmadsuyadi.barqiadsmanager.ads.unityads.MyUnityAds
 import com.ahmadsuyadi.barqiadsmanager.model.ConfigAdsModel
-import com.mopub.mobileads.MoPubView
-import com.startapp.sdk.ads.banner.Banner
 
 class AdsManager(
-        private val admobAds: AdmobAds,
-        private val unityAds: MyUnityAds,
-        private val fanAds: FanAds,
-        private val mopubAds: MopubAds,
-        private val startAppAds: StartAppAds,
-        private val appLovinAds: AppLovinAds,
+    private val admobAds: AdmobAds,
+    private val unityAds: MyUnityAds,
+    private val fanAds: FanAds,
+    private val mopubAds: MopubAds,
+    private val startAppAds: StartAppAds,
+    private val appLovinAds: AppLovinAds,
 ) {
 
     fun setUp(configAdsModel: ConfigAdsModel) {
@@ -57,11 +56,7 @@ class AdsManager(
             }
     }
 
-    fun showBanner(
-            adView: LinearLayout? = null,
-            moPubView: MoPubView? = null,
-            bannerStartApp: Banner? = null
-    ) {
+    fun showBanner(adView: LinearLayout? = null) {
         if (ConfigAds.isShowAds) {
             adView?.let {
                 when (ConfigAds.modeAds) {
@@ -73,16 +68,6 @@ class AdsManager(
                     6 -> appLovinAds.showBanner(it)
                 }
             }
-            /*moPubView?.let {
-                when (ConfigAds.modeAds) {
-                    4 -> mopubAds.showBanner(it)
-                }
-            }
-            bannerStartApp?.let {
-                when (ConfigAds.modeAds) {
-                    5 -> startAppAds.showBanner(it)
-                }
-            }*/
         }
     }
 

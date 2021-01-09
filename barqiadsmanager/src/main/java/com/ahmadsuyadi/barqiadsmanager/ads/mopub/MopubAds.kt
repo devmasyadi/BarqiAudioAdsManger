@@ -5,7 +5,7 @@ import android.content.Context
 import android.widget.LinearLayout
 import com.ahmadsuyadi.barqiadsmanager.BuildConfig
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
-import com.ahmadsuyadi.barqiadsmanager.utils.visible
+import com.ahmadsuyadi.barqiadsmanager.ads.IAds
 import com.mopub.common.MoPub
 import com.mopub.common.SdkConfiguration
 import com.mopub.common.logging.MoPubLog
@@ -16,7 +16,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
 
-class MopubAds : IMopub, AnkoLogger {
+class MopubAds : IAds, AnkoLogger {
 
     private lateinit var sdkConfiguration: SdkConfiguration
     private var mInterstitial: MoPubInterstitial? = null
@@ -27,8 +27,8 @@ class MopubAds : IMopub, AnkoLogger {
         this.activity = activity
         context = activity.applicationContext
         sdkConfiguration = SdkConfiguration.Builder(ConfigAds.mopubBanner)
-                .withLogLevel(if (BuildConfig.DEBUG) MoPubLog.LogLevel.DEBUG else MoPubLog.LogLevel.INFO)
-                .build()
+            .withLogLevel(if (BuildConfig.DEBUG) MoPubLog.LogLevel.DEBUG else MoPubLog.LogLevel.INFO)
+            .build()
         MoPub.initializeSdk(activity, sdkConfiguration) {
             info("onInitializationFinished")
         }
@@ -38,14 +38,14 @@ class MopubAds : IMopub, AnkoLogger {
         mInterstitial?.load()
     }
 
-    override fun showBanner(addView: LinearLayout) {
-        val moPubView =  MoPubView(context).apply {
+    override fun showBanner(adView: LinearLayout) {
+        val moPubView = MoPubView(context).apply {
             setAdUnitId(ConfigAds.mopubBanner)
             adSize = MoPubView.MoPubAdSize.HEIGHT_50
             loadAd(MoPubView.MoPubAdSize.HEIGHT_50)
             loadAd()
         }
-        addView.addView(moPubView)
+        adView.addView(moPubView)
     }
 
     override fun showInterstitial() {
@@ -68,8 +68,8 @@ class MopubAds : IMopub, AnkoLogger {
         }
 
         override fun onInterstitialFailed(
-                interstitial: MoPubInterstitial?,
-                errorCode: MoPubErrorCode?
+            interstitial: MoPubInterstitial?,
+            errorCode: MoPubErrorCode?
         ) {
             info("onInterstitialFailed, errorCode : $errorCode")
         }

@@ -1,6 +1,6 @@
 package com.ahmadsuyadi.barqiadsmanager.di
 
-import com.ahmadsuyadi.barqiadsmanager.AdsManager
+import com.ahmadsuyadi.barqiadsmanager.ads.AdsManager
 import com.ahmadsuyadi.barqiadsmanager.ads.admob.AdmobAds
 import com.ahmadsuyadi.barqiadsmanager.ads.applovin.AppLovinAds
 import com.ahmadsuyadi.barqiadsmanager.ads.fan.FanAds
@@ -19,6 +19,13 @@ val barqiAdsModule = module {
     single { AppLovinAds() }
 
     single {
-        AdsManager(get(), get(), get(), get(), get(), get())
+        AdsManager(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
     }
 }

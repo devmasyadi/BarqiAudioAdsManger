@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.widget.LinearLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
+import com.ahmadsuyadi.barqiadsmanager.ads.IAds
 import com.unity3d.ads.IUnityAdsListener
 import com.unity3d.ads.UnityAds
 import com.unity3d.services.banners.BannerErrorInfo
@@ -12,7 +13,7 @@ import com.unity3d.services.banners.UnityBannerSize
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class MyUnityAds : IUnityAds, AnkoLogger {
+class MyUnityAds : IAds, AnkoLogger {
 
     private lateinit var activity: Activity
     private lateinit var context: Context

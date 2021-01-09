@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
+import com.ahmadsuyadi.barqiadsmanager.ads.IAds
 import com.startapp.sdk.ads.banner.Banner
 import com.startapp.sdk.ads.banner.BannerListener
 import com.startapp.sdk.adsbase.Ad
@@ -14,7 +16,8 @@ import com.startapp.sdk.adsbase.adlisteners.AdDisplayListener
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class StartAppAds : IStartApp, AnkoLogger {
+
+class StartAppAds : IAds, AnkoLogger {
 
     private lateinit var activity: Activity
     private lateinit var context: Context
@@ -28,9 +31,15 @@ class StartAppAds : IStartApp, AnkoLogger {
         startAppAd = StartAppAd(context)
     }
 
-    override fun showBanner(addView: LinearLayout) {
+    override fun showBanner(adView: LinearLayout) {
         val startAppBanner = Banner(activity, bannerListener)
-        addView.addView(startAppBanner)
+        val bannerParameters = RelativeLayout.LayoutParams(
+            RelativeLayout.LayoutParams.WRAP_CONTENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT
+        )
+        bannerParameters.addRule(RelativeLayout.CENTER_HORIZONTAL)
+        bannerParameters.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
+        adView.addView(startAppBanner, bannerParameters)
     }
 
     override fun showInterstitial() {

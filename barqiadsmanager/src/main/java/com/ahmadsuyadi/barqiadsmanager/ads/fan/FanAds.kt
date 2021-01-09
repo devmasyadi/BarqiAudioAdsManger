@@ -4,12 +4,13 @@ import android.app.Activity
 import android.content.Context
 import android.widget.LinearLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
+import com.ahmadsuyadi.barqiadsmanager.ads.IAds
 import com.facebook.ads.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import java.util.*
 
-class FanAds : IFan, AudienceNetworkAds.InitListener, AnkoLogger {
+class FanAds : IAds, AudienceNetworkAds.InitListener, AnkoLogger {
 
     private var interstitialAd: InterstitialAd? = null
     private lateinit var activity: Activity
@@ -35,11 +36,11 @@ class FanAds : IFan, AudienceNetworkAds.InitListener, AnkoLogger {
         }
         interstitialAd = InterstitialAd(context, ConfigAds.fanInter)
         interstitialAd?.loadAd(
-                interstitialAd!!
-                        .buildLoadAdConfig()
-                        .withAdListener(interstitialListener)
-                        .withCacheFlags(EnumSet.of(CacheFlag.VIDEO))
-                        .build()
+            interstitialAd!!
+                .buildLoadAdConfig()
+                .withAdListener(interstitialListener)
+                .withCacheFlags(EnumSet.of(CacheFlag.VIDEO))
+                .build()
         )
     }
 
