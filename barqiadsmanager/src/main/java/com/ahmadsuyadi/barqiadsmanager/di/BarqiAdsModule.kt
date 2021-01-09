@@ -25,6 +25,7 @@ val barqiAdsModule = module {
             get(),
             get(),
             get(),
+            get(),
             get()
         )
     }

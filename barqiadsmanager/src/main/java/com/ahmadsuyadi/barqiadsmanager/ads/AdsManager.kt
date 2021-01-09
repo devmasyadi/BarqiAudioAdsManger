@@ -1,6 +1,7 @@
 package com.ahmadsuyadi.barqiadsmanager.ads
 
 import android.app.Activity
+import android.content.Context
 import android.widget.RelativeLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
 import com.ahmadsuyadi.barqiadsmanager.ads.admob.AdmobAds
@@ -10,6 +11,7 @@ import com.ahmadsuyadi.barqiadsmanager.ads.mopub.MopubAds
 import com.ahmadsuyadi.barqiadsmanager.ads.startapp.StartAppAds
 import com.ahmadsuyadi.barqiadsmanager.ads.unityads.MyUnityAds
 import com.ahmadsuyadi.barqiadsmanager.model.ConfigAdsModel
+import com.ahmadsuyadi.barqiadsmanager.utils.isOnline
 
 class AdsManager(
     private val admobAds: AdmobAds,
@@ -18,6 +20,7 @@ class AdsManager(
     private val mopubAds: MopubAds,
     private val startAppAds: StartAppAds,
     private val appLovinAds: AppLovinAds,
+    private val context: Context
 ) {
 
     fun setUp(configAdsModel: ConfigAdsModel) {
@@ -57,7 +60,7 @@ class AdsManager(
     }
 
     fun showBanner(adView: RelativeLayout? = null) {
-        if (ConfigAds.isShowAds) {
+        if (ConfigAds.isShowAds && context.isOnline()) {
             adView?.let {
                 when (ConfigAds.modeAds) {
                     1 -> admobAds.showBanner(it)
@@ -72,7 +75,7 @@ class AdsManager(
     }
 
     fun showInterstitial() {
-        if (ConfigAds.isShowAds) {
+        if (ConfigAds.isShowAds && context.isOnline()) {
             if (ConfigAds.currentCountAds % ConfigAds.intervalInt == 0)
                 when (ConfigAds.modeAds) {
                     1 -> admobAds.showInterstitial()
