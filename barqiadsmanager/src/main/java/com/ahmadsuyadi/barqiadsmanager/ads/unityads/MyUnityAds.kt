@@ -2,7 +2,7 @@ package com.ahmadsuyadi.barqiadsmanager.ads.unityads
 
 import android.app.Activity
 import android.content.Context
-import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
 import com.ahmadsuyadi.barqiadsmanager.ads.IAds
 import com.unity3d.ads.IUnityAdsListener
@@ -25,7 +25,7 @@ class MyUnityAds : IAds, AnkoLogger {
         UnityAds.addListener(iUnityAdsListener)
     }
 
-    override fun showBanner(adView: LinearLayout) {
+    override fun showBanner(adView: RelativeLayout) {
         val bottomBanner = BannerView(activity, ConfigAds.unityBanner, UnityBannerSize(320, 50))
         bottomBanner.listener = bannerListener
         adView.addView(bottomBanner)

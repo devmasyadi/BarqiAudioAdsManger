@@ -3,7 +3,6 @@ package com.ahmadsuyadi.barqiadsmanager.ads.startapp
 import android.app.Activity
 import android.content.Context
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
 import com.ahmadsuyadi.barqiadsmanager.ads.IAds
@@ -31,7 +30,7 @@ class StartAppAds : IAds, AnkoLogger {
         startAppAd = StartAppAd(context)
     }
 
-    override fun showBanner(adView: LinearLayout) {
+    override fun showBanner(adView: RelativeLayout) {
         val startAppBanner = Banner(activity, bannerListener)
         val bannerParameters = RelativeLayout.LayoutParams(
             RelativeLayout.LayoutParams.WRAP_CONTENT,

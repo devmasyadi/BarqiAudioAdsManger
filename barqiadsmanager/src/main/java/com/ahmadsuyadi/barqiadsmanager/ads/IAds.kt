@@ -1,10 +1,10 @@
 package com.ahmadsuyadi.barqiadsmanager.ads
 
 import android.app.Activity
-import android.widget.LinearLayout
+import android.widget.RelativeLayout
 
 interface IAds {
     fun initialize(activity: Activity)
-    fun showBanner(adView: LinearLayout)
+    fun showBanner(adView: RelativeLayout)
     fun showInterstitial()
 }

@@ -2,7 +2,7 @@ package com.ahmadsuyadi.barqiadsmanager.ads.fan
 
 import android.app.Activity
 import android.content.Context
-import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
 import com.ahmadsuyadi.barqiadsmanager.ads.IAds
 import com.facebook.ads.*
@@ -44,7 +44,7 @@ class FanAds : IAds, AudienceNetworkAds.InitListener, AnkoLogger {
         )
     }
 
-    override fun showBanner(adView: LinearLayout) {
+    override fun showBanner(adView: RelativeLayout) {
         val bannerAdView = AdView(context, ConfigAds.fanBanner, AdSize.BANNER_HEIGHT_50)
         with(bannerAdView) {
             adView.addView(this)

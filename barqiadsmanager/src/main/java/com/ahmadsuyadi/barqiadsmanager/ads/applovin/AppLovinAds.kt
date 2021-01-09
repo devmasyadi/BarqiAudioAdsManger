@@ -1,7 +1,7 @@
 package com.ahmadsuyadi.barqiadsmanager.ads.applovin
 
 import android.app.Activity
-import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
 import com.ahmadsuyadi.barqiadsmanager.ads.IAds
 import com.applovin.mediation.MaxAd
@@ -34,8 +34,11 @@ class AppLovinAds : IAds, AnkoLogger {
         createInterstitialAd()
     }
 
-    override fun showBanner(adView: LinearLayout) {
-        createBannerAd(adView)
+    override fun showBanner(adView: RelativeLayout) {
+        val appLovinBanner = MaxAdView(ConfigAds.appLovinBanner, activity)
+        appLovinBanner.setListener(bannerListener)
+        adView.addView(appLovinBanner)
+        appLovinBanner.loadAd()
     }
 
     override fun showInterstitial() {
@@ -51,18 +54,6 @@ class AppLovinAds : IAds, AnkoLogger {
 
         // Load the first ad
         interstitialAd.loadAd()
-    }
-
-    private var adView: MaxAdView? = null
-
-    private fun createBannerAd(rootView: LinearLayout) {
-        adView = MaxAdView(ConfigAds.appLovinBanner, activity)
-        adView?.setListener(bannerListener)
-
-        rootView.addView(adView)
-
-        // Load the ad
-        adView?.loadAd()
     }
 
     private val interstitialListener = object : MaxAdListener {

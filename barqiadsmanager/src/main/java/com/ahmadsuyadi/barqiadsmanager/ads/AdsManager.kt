@@ -1,7 +1,7 @@
 package com.ahmadsuyadi.barqiadsmanager.ads
 
 import android.app.Activity
-import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
 import com.ahmadsuyadi.barqiadsmanager.ads.admob.AdmobAds
 import com.ahmadsuyadi.barqiadsmanager.ads.applovin.AppLovinAds
@@ -56,7 +56,7 @@ class AdsManager(
             }
     }
 
-    fun showBanner(adView: LinearLayout? = null) {
+    fun showBanner(adView: RelativeLayout? = null) {
         if (ConfigAds.isShowAds) {
             adView?.let {
                 when (ConfigAds.modeAds) {

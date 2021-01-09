@@ -2,7 +2,7 @@ package com.ahmadsuyadi.barqiadsmanager.ads.admob
 
 import android.app.Activity
 import android.content.Context
-import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
 import com.ahmadsuyadi.barqiadsmanager.ads.IAds
 import com.google.android.gms.ads.*
@@ -43,7 +43,7 @@ class AdmobAds : IAds, AnkoLogger {
         }
     }
 
-    override fun showBanner(adView: LinearLayout) {
+    override fun showBanner(adView: RelativeLayout) {
         val mAdView = AdView(context).apply {
             adUnitId =
                 if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/6300978111" else ConfigAds.idBannerAdMob

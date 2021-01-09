@@ -2,7 +2,7 @@ package com.ahmadsuyadi.barqiadsmanager.ads.mopub
 
 import android.app.Activity
 import android.content.Context
-import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import com.ahmadsuyadi.barqiadsmanager.BuildConfig
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
 import com.ahmadsuyadi.barqiadsmanager.ads.IAds
@@ -38,7 +38,7 @@ class MopubAds : IAds, AnkoLogger {
         mInterstitial?.load()
     }
 
-    override fun showBanner(adView: LinearLayout) {
+    override fun showBanner(adView: RelativeLayout) {
         val moPubView = MoPubView(context).apply {
             setAdUnitId(ConfigAds.mopubBanner)
             adSize = MoPubView.MoPubAdSize.HEIGHT_50

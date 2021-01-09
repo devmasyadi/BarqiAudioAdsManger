@@ -13,12 +13,10 @@
         android:layout_height="wrap_content"
         android:text="Show Inter" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_gravity="bottom"
         android:id="@+id/bannerView"
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" />
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>
