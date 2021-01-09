@@ -9,7 +9,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import java.util.*
 
-class FanAds: IFan, AudienceNetworkAds.InitListener, AnkoLogger {
+class FanAds : IFan, AudienceNetworkAds.InitListener, AnkoLogger {
 
     private var interstitialAd: InterstitialAd? = null
     private var bannerAdView: AdView? = null
@@ -36,11 +36,11 @@ class FanAds: IFan, AudienceNetworkAds.InitListener, AnkoLogger {
         }
         interstitialAd = InterstitialAd(context, ConfigAds.fanInter)
         interstitialAd?.loadAd(
-            interstitialAd!!
-                .buildLoadAdConfig()
-                .withAdListener(interstitialListener)
-                .withCacheFlags(EnumSet.of(CacheFlag.VIDEO))
-                .build()
+                interstitialAd!!
+                        .buildLoadAdConfig()
+                        .withAdListener(interstitialListener)
+                        .withCacheFlags(EnumSet.of(CacheFlag.VIDEO))
+                        .build()
         )
     }
 
@@ -51,7 +51,7 @@ class FanAds: IFan, AudienceNetworkAds.InitListener, AnkoLogger {
         bannerAdView?.let { nonNullBannerAdView ->
             adView.addView(nonNullBannerAdView)
             nonNullBannerAdView.loadAd(
-                nonNullBannerAdView.buildLoadAdConfig().withAdListener(bannerListener).build()
+                    nonNullBannerAdView.buildLoadAdConfig().withAdListener(bannerListener).build()
             )
         }
     }

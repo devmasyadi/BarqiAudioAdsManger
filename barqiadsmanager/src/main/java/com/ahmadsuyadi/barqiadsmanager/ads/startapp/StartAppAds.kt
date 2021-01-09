@@ -14,7 +14,7 @@ import com.startapp.sdk.adsbase.adlisteners.AdDisplayListener
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class StartAppAds: IStartApp, AnkoLogger {
+class StartAppAds : IStartApp, AnkoLogger {
 
     private lateinit var activity: Activity
     private lateinit var context: Context
@@ -29,14 +29,14 @@ class StartAppAds: IStartApp, AnkoLogger {
     }
 
     override fun showBanner(banner: Banner) {
-         banner.visible()
+        banner.visible()
     }
 
     override fun showInterstitial() {
         startAppAd.showAd(interstitialListener)
     }
 
-    private val interstitialListener = object: AdDisplayListener {
+    private val interstitialListener = object : AdDisplayListener {
         override fun adHidden(p0: Ad?) {
             info("interstitial adHidden $p0")
         }

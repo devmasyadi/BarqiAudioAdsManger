@@ -1,10 +1,8 @@
 package com.ahmadsuyadi.barqiadsmanager.ads.mopub
 
 import android.app.Activity
-import android.content.Context
 import com.ahmadsuyadi.barqiadsmanager.BuildConfig
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
-import com.ahmadsuyadi.barqiadsmanager.utils.activity
 import com.ahmadsuyadi.barqiadsmanager.utils.visible
 import com.mopub.common.MoPub
 import com.mopub.common.SdkConfiguration
@@ -16,7 +14,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
 
-class MopubAds: IMopub, AnkoLogger {
+class MopubAds : IMopub, AnkoLogger {
 
     private lateinit var sdkConfiguration: SdkConfiguration
     private var mInterstitial: MoPubInterstitial? = null
@@ -25,8 +23,8 @@ class MopubAds: IMopub, AnkoLogger {
     override fun initialize(activity: Activity) {
         this.activity = activity
         sdkConfiguration = SdkConfiguration.Builder(ConfigAds.mopubBanner)
-            .withLogLevel(if (BuildConfig.DEBUG) MoPubLog.LogLevel.DEBUG else MoPubLog.LogLevel.INFO)
-            .build()
+                .withLogLevel(if (BuildConfig.DEBUG) MoPubLog.LogLevel.DEBUG else MoPubLog.LogLevel.INFO)
+                .build()
         MoPub.initializeSdk(activity, sdkConfiguration) {
             info("onInitializationFinished")
         }
@@ -66,8 +64,8 @@ class MopubAds: IMopub, AnkoLogger {
         }
 
         override fun onInterstitialFailed(
-            interstitial: MoPubInterstitial?,
-            errorCode: MoPubErrorCode?
+                interstitial: MoPubInterstitial?,
+                errorCode: MoPubErrorCode?
         ) {
             info("onInterstitialFailed, errorCode : $errorCode")
         }

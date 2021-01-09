@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.widget.LinearLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
-import com.ahmadsuyadi.barqiadsmanager.utils.activity
 import com.unity3d.ads.IUnityAdsListener
 import com.unity3d.ads.UnityAds
 import com.unity3d.services.banners.BannerErrorInfo
@@ -13,7 +12,7 @@ import com.unity3d.services.banners.UnityBannerSize
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class MyUnityAds: IUnityAds, AnkoLogger {
+class MyUnityAds : IUnityAds, AnkoLogger {
 
     private lateinit var activity: Activity
     private lateinit var context: Context
@@ -32,7 +31,7 @@ class MyUnityAds: IUnityAds, AnkoLogger {
         bottomBanner.load()
     }
 
-    private val iUnityAdsListener = object: IUnityAdsListener {
+    private val iUnityAdsListener = object : IUnityAdsListener {
         override fun onUnityAdsStart(placementId: String?) {
             info("onUnityAdsStart placementId: $placementId")
         }
@@ -50,7 +49,7 @@ class MyUnityAds: IUnityAds, AnkoLogger {
         }
     }
 
-    private val bannerListener = object: BannerView.IListener {
+    private val bannerListener = object : BannerView.IListener {
         override fun onBannerLeftApplication(p0: BannerView?) {
 
         }

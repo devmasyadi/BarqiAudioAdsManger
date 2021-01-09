@@ -2,7 +2,6 @@ package com.ahmadsuyadi.barqiadsmanager
 
 import android.app.Activity
 import android.widget.LinearLayout
-import com.ahmadsuyadi.barqiadsmanager.ads.IAds
 import com.ahmadsuyadi.barqiadsmanager.ads.admob.AdmobAds
 import com.ahmadsuyadi.barqiadsmanager.ads.applovin.AppLovinAds
 import com.ahmadsuyadi.barqiadsmanager.ads.fan.FanAds
@@ -12,16 +11,15 @@ import com.ahmadsuyadi.barqiadsmanager.ads.unityads.MyUnityAds
 import com.ahmadsuyadi.barqiadsmanager.model.ConfigAdsModel
 import com.mopub.mobileads.MoPubView
 import com.startapp.sdk.ads.banner.Banner
-import org.jetbrains.anko.AnkoLogger
 
 class AdsManager(
-    private val admobAds: AdmobAds,
-    private val unityAds: MyUnityAds,
-    private val fanAds: FanAds,
-    private val mopubAds: MopubAds,
-    private val startAppAds: StartAppAds,
-    private val appLovinAds: AppLovinAds,
-): AnkoLogger {
+        private val admobAds: AdmobAds,
+        private val unityAds: MyUnityAds,
+        private val fanAds: FanAds,
+        private val mopubAds: MopubAds,
+        private val startAppAds: StartAppAds,
+        private val appLovinAds: AppLovinAds,
+) {
 
     fun setUp(configAdsModel: ConfigAdsModel) {
         with(configAdsModel) {
@@ -59,22 +57,10 @@ class AdsManager(
             }
     }
 
-    fun initData() {
-        if (ConfigAds.isShowAds)
-            when (ConfigAds.modeAds) {
-                1 -> admobAds.initData()
-                2 -> fanAds.initData()
-                3 -> unityAds.initData()
-                4 -> mopubAds.initData()
-                5 -> startAppAds.initData()
-                6 -> appLovinAds.initData()
-            }
-    }
-
     fun showBanner(
-        adView: LinearLayout? = null,
-        moPubView: MoPubView? = null,
-        bannerStartApp: Banner? = null
+            adView: LinearLayout? = null,
+            moPubView: MoPubView? = null,
+            bannerStartApp: Banner? = null
     ) {
         if (ConfigAds.isShowAds) {
             adView?.let {
