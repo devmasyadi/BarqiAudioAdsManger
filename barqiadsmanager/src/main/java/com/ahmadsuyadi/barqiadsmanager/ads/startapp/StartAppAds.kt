@@ -37,7 +37,6 @@ class StartAppAds : IAds, AnkoLogger {
             RelativeLayout.LayoutParams.WRAP_CONTENT
         )
         bannerParameters.addRule(RelativeLayout.CENTER_HORIZONTAL)
-        bannerParameters.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
         adView.addView(startAppBanner, bannerParameters)
     }
 
