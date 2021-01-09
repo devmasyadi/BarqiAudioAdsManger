@@ -1,8 +1,8 @@
 package com.ahmadsuyadi.barqiadsmanager.ads.startapp
 
+import android.widget.LinearLayout
 import com.ahmadsuyadi.barqiadsmanager.ads.IAds
-import com.startapp.sdk.ads.banner.Banner
 
 interface IStartApp : IAds {
-    fun showBanner(banner: Banner)
+    fun showBanner(banner: LinearLayout)
 }

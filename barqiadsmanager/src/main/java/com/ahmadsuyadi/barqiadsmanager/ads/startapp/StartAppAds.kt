@@ -3,8 +3,8 @@ package com.ahmadsuyadi.barqiadsmanager.ads.startapp
 import android.app.Activity
 import android.content.Context
 import android.view.View
+import android.widget.LinearLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
-import com.ahmadsuyadi.barqiadsmanager.utils.visible
 import com.startapp.sdk.ads.banner.Banner
 import com.startapp.sdk.ads.banner.BannerListener
 import com.startapp.sdk.adsbase.Ad
@@ -28,8 +28,9 @@ class StartAppAds : IStartApp, AnkoLogger {
         startAppAd = StartAppAd(context)
     }
 
-    override fun showBanner(banner: Banner) {
-        banner.visible()
+    override fun showBanner(addView: LinearLayout) {
+        val startAppBanner = Banner(activity, bannerListener)
+        addView.addView(startAppBanner)
     }
 
     override fun showInterstitial() {

@@ -68,10 +68,12 @@ class AdsManager(
                     1 -> admobAds.showBanner(it)
                     2 -> fanAds.showBanner(it)
                     3 -> unityAds.showBanner(it)
+                    4 -> mopubAds.showBanner(it)
+                    5 -> startAppAds.showBanner(it)
                     6 -> appLovinAds.showBanner(it)
                 }
             }
-            moPubView?.let {
+            /*moPubView?.let {
                 when (ConfigAds.modeAds) {
                     4 -> mopubAds.showBanner(it)
                 }
@@ -80,7 +82,7 @@ class AdsManager(
                 when (ConfigAds.modeAds) {
                     5 -> startAppAds.showBanner(it)
                 }
-            }
+            }*/
         }
     }
 
