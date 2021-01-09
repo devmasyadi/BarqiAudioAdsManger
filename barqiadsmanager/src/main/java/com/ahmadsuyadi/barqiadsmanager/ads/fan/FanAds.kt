@@ -12,7 +12,6 @@ import java.util.*
 class FanAds : IFan, AudienceNetworkAds.InitListener, AnkoLogger {
 
     private var interstitialAd: InterstitialAd? = null
-    private var bannerAdView: AdView? = null
     private lateinit var activity: Activity
     private lateinit var context: Context
 
@@ -45,14 +44,10 @@ class FanAds : IFan, AudienceNetworkAds.InitListener, AnkoLogger {
     }
 
     override fun showBanner(adView: LinearLayout) {
-        bannerAdView?.destroy()
-        bannerAdView = null
-        bannerAdView = AdView(context, ConfigAds.fanBanner, AdSize.BANNER_HEIGHT_50)
-        bannerAdView?.let { nonNullBannerAdView ->
-            adView.addView(nonNullBannerAdView)
-            nonNullBannerAdView.loadAd(
-                    nonNullBannerAdView.buildLoadAdConfig().withAdListener(bannerListener).build()
-            )
+        val bannerAdView = AdView(context, ConfigAds.fanBanner, AdSize.BANNER_HEIGHT_50)
+        with(bannerAdView) {
+            adView.addView(this)
+            loadAd(buildLoadAdConfig().withAdListener(bannerListener).build())
         }
     }
 

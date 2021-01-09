@@ -10,7 +10,6 @@ import org.jetbrains.anko.info
 
 class AdmobAds : IAdmob, AnkoLogger {
 
-    private var mAdView: AdView? = null
     private lateinit var adRequest: AdRequest
     private lateinit var mInterstitialAd: InterstitialAd
     private lateinit var activity: Activity
@@ -28,10 +27,6 @@ class AdmobAds : IAdmob, AnkoLogger {
         MobileAds.initialize(activity) { info("onInitialize Admob") }
 
         adRequest = AdRequest.Builder().build()
-        mAdView = AdView(context).apply {
-            adUnitId = if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/6300978111" else ConfigAds.idBannerAdMob
-            adSize = AdSize.BANNER
-        }
 
         mInterstitialAd = InterstitialAd(context).apply {
             adUnitId = if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/1033173712" else ConfigAds.idInterstitialAdMob
@@ -47,11 +42,13 @@ class AdmobAds : IAdmob, AnkoLogger {
     }
 
     override fun showBanner(adView: LinearLayout) {
-        mAdView?.let {
-            with(it) {
-                adView.addView(this)
-                loadAd(adRequest)
-            }
+        val mAdView = AdView(context).apply {
+            adUnitId = if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/6300978111" else ConfigAds.idBannerAdMob
+            adSize = AdSize.BANNER
+        }
+        with(mAdView) {
+            adView.addView(this)
+            loadAd(adRequest)
         }
     }
 
