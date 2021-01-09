@@ -26,27 +26,20 @@ class AdmobAds : IAdmob, AnkoLogger {
                     .build()
             )
         MobileAds.initialize(activity) { info("onInitialize Admob") }
-    }
 
-    override fun initData() {
         adRequest = AdRequest.Builder().build()
         mAdView = AdView(context).apply {
-            adUnitId =
-                if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/6300978111" else ConfigAds.idBannerAdMob
+            adUnitId = if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/6300978111" else ConfigAds.idBannerAdMob
             adSize = AdSize.BANNER
-            info("adUnitId banner : $adUnitId")
         }
 
         mInterstitialAd = InterstitialAd(context).apply {
-            adUnitId =
-                if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/1033173712" else ConfigAds.idInterstitialAdMob
-            info("adUnitId inter : $adUnitId")
+            adUnitId = if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/1033173712" else ConfigAds.idInterstitialAdMob
             loadAd(adRequest)
             adListener = object : AdListener() {
                 override fun onAdClosed() {
                     if (!mInterstitialAd.isLoading && !mInterstitialAd.isLoaded) {
                         mInterstitialAd.loadAd(adRequest)
-                        info("onAdClosed")
                     }
                 }
             }
@@ -58,7 +51,6 @@ class AdmobAds : IAdmob, AnkoLogger {
             with(it) {
                 adView.addView(this)
                 loadAd(adRequest)
-                info("showBanner Admob")
             }
         }
     }
@@ -66,7 +58,6 @@ class AdmobAds : IAdmob, AnkoLogger {
     override fun showInterstitial() {
         if (mInterstitialAd.isLoaded) {
             mInterstitialAd.show()
-            info("showInterstitial Admob")
         }
     }
 

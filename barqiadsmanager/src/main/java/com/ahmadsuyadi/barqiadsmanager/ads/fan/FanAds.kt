@@ -26,6 +26,7 @@ class FanAds: IFan, AudienceNetworkAds.InitListener, AnkoLogger {
         AudienceNetworkAds.buildInitSettings(activity).withInitListener(this).initialize()
         AdSettings.setTestMode(ConfigAds.isTestAds)
         AdSettings.setIntegrationErrorMode(AdSettings.IntegrationErrorMode.INTEGRATION_ERROR_CRASH_DEBUG_MODE);
+        requestInterstitial()
     }
 
     private fun requestInterstitial() {
@@ -43,10 +44,6 @@ class FanAds: IFan, AudienceNetworkAds.InitListener, AnkoLogger {
         )
     }
 
-    override fun initData() {
-        requestInterstitial()
-    }
-
     override fun showBanner(adView: LinearLayout) {
         bannerAdView?.destroy()
         bannerAdView = null
@@ -62,7 +59,6 @@ class FanAds: IFan, AudienceNetworkAds.InitListener, AnkoLogger {
     override fun showInterstitial() {
         if (interstitialAd != null || interstitialAd!!.isAdLoaded) {
             interstitialAd?.show()
-            info("showInterstitial fan")
         }
     }
 

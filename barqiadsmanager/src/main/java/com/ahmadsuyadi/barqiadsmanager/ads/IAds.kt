@@ -6,7 +6,5 @@ interface IAds {
 
     fun initialize(activity: Activity)
 
-    fun initData()
-
     fun showInterstitial()
 }

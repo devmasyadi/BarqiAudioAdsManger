@@ -32,9 +32,6 @@ class AppLovinAds : IAppLovin, AnkoLogger {
         AppLovinSdk.getInstance(activity).initializeSdk {
             info("Success initialize appLovinAds")
         }
-    }
-
-    override fun initData() {
         createInterstitialAd()
     }
 

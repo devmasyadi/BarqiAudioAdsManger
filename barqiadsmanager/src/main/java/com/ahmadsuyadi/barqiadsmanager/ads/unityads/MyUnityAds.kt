@@ -22,9 +22,6 @@ class MyUnityAds: IUnityAds, AnkoLogger {
         this.activity = activity
         context = activity.applicationContext
         UnityAds.initialize(context, ConfigAds.unityGameID, ConfigAds.isTestAds)
-    }
-
-    override fun initData() {
         UnityAds.addListener(iUnityAdsListener)
     }
 

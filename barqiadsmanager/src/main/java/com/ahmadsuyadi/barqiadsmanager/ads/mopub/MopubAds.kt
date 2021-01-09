@@ -30,9 +30,7 @@ class MopubAds: IMopub, AnkoLogger {
         MoPub.initializeSdk(activity, sdkConfiguration) {
             info("onInitializationFinished")
         }
-    }
 
-    override fun initData() {
         mInterstitial = MoPubInterstitial(activity, ConfigAds.mopubInter)
         mInterstitial?.interstitialAdListener = interstitialAdListener
         mInterstitial?.load()
