@@ -60,7 +60,7 @@ class AdsManager(
     }
 
     fun showBanner(adView: RelativeLayout? = null) {
-        if (ConfigAds.isShowAds && context.isOnline()) {
+        if (ConfigAds.isShowAds) {
             adView?.let {
                 when (ConfigAds.modeAds) {
                     1 -> admobAds.showBanner(it)
