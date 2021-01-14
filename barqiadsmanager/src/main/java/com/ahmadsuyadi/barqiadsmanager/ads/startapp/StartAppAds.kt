@@ -26,7 +26,8 @@ class StartAppAds : IAds, AnkoLogger {
         this.activity = activity
         context = activity.applicationContext
         StartAppSDK.init(context, ConfigAds.startAppId, true)
-        StartAppSDK.setTestAdsEnabled(ConfigAds.isTestAds);
+        if (ConfigAds.isTestAds)
+            StartAppSDK.setTestAdsEnabled(ConfigAds.isTestAds);
         startAppAd = StartAppAd(context)
     }
 

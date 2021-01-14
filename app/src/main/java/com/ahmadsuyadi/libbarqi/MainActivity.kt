@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ahmadsuyadi.barqiadsmanager.ads.AdsManager
 import com.ahmadsuyadi.barqiadsmanager.model.ConfigAdsModel
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.AnkoLogger
 import org.koin.android.ext.android.inject
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(), AnkoLogger {
 
     private val adsManager: AdsManager by inject()
 
@@ -15,20 +17,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         adsManager.setUp(
-                ConfigAdsModel(
-                        isShowAds = true,
-                        isTestAds = true,
-                        modeAds = 5,
-                        startAppId = "200181702"
-                )
+            ConfigAdsModel(
+                isShowAds = true,
+                isTestAds = true,
+                modeAds = 1,
+                startAppId = "200181702"
+            )
         )
+
         adsManager.initialize(this)
-
         adsManager.showBanner(adView = bannerView)
-
         btnShowInter.setOnClickListener {
             adsManager.showInterstitial()
         }
+        btnResetGdpr.setOnClickListener {
 
+        }
     }
 }

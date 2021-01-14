@@ -10,6 +10,7 @@ import com.ahmadsuyadi.barqiadsmanager.ads.mopub.MopubAds
 import com.ahmadsuyadi.barqiadsmanager.ads.startapp.StartAppAds
 import com.ahmadsuyadi.barqiadsmanager.ads.unityads.MyUnityAds
 import com.ahmadsuyadi.barqiadsmanager.model.ConfigAdsModel
+import org.jetbrains.anko.AnkoLogger
 
 class AdsManager(
     private val admobAds: AdmobAds,
@@ -18,7 +19,7 @@ class AdsManager(
     private val mopubAds: MopubAds,
     private val startAppAds: StartAppAds,
     private val appLovinAds: AppLovinAds
-) {
+) : AnkoLogger {
 
     fun setUp(configAdsModel: ConfigAdsModel) {
         with(configAdsModel) {

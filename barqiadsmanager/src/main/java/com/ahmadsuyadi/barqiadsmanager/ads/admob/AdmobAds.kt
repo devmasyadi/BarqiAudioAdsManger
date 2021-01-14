@@ -22,13 +22,10 @@ class AdmobAds : IAds, AnkoLogger {
         if (ConfigAds.isTestAds)
             MobileAds.setRequestConfiguration(
                 RequestConfiguration.Builder()
-                    .setTestDeviceIds(listOf("DB312C879640DB1A1BA381031953D342"))
                     .build()
             )
         MobileAds.initialize(activity) { info("onInitialize Admob") }
-
         adRequest = AdRequest.Builder().build()
-
         mInterstitialAd = InterstitialAd(context).apply {
             adUnitId =
                 if (ConfigAds.isTestAds) "ca-app-pub-3940256099942544/1033173712" else ConfigAds.idInterstitialAdMob
