@@ -5,6 +5,7 @@ data class ConfigAdsModel(
     val startAppId: String? = null,
     val intervalInt: Int? = null,
     val unityGameID: String? = null,
+    val testDeviceID: String? = null,
     val isTestAds: Boolean? = null,
     val idRewardAdmob: String? = null,
     val idBannerAdmob: String? = null,
@@ -18,6 +19,7 @@ data class ConfigAdsModel(
     val mopubBanner: String? = null,
     val idIntAdmob: String? = null,
     val unityInter: String? = null,
+    val sdkKeyAppLovin: String? = null,
     val appLovinInter: String? = null,
     val appLovinBanner: String? = null,
 )

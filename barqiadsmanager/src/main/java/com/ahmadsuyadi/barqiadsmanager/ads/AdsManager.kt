@@ -10,7 +10,7 @@ import com.ahmadsuyadi.barqiadsmanager.ads.mopub.MopubAds
 import com.ahmadsuyadi.barqiadsmanager.ads.startapp.StartAppAds
 import com.ahmadsuyadi.barqiadsmanager.ads.unityads.MyUnityAds
 import com.ahmadsuyadi.barqiadsmanager.model.ConfigAdsModel
-import org.jetbrains.anko.AnkoLogger
+import com.ahmadsuyadi.barqiadsmanager.utils.ConfigAdsMapper
 
 class AdsManager(
     private val admobAds: AdmobAds,
@@ -19,30 +19,10 @@ class AdsManager(
     private val mopubAds: MopubAds,
     private val startAppAds: StartAppAds,
     private val appLovinAds: AppLovinAds
-) : AnkoLogger {
+) {
 
     fun setUp(configAdsModel: ConfigAdsModel) {
-        with(configAdsModel) {
-            ConfigAds.isShowAds = isShowAds ?: false
-            ConfigAds.isTestAds = isTestAds ?: false
-            ConfigAds.modeAds = modeAds ?: 1
-            ConfigAds.idBannerAdMob = idBannerAdmob ?: ""
-            ConfigAds.idInterstitialAdMob = idIntAdmob ?: ""
-            ConfigAds.idNativeAdmob = idNativeAdmob ?: ""
-            ConfigAds.idRewardAdmob = idRewardAdmob ?: ""
-            ConfigAds.openIdAdmob = openIdAdmob ?: ""
-            ConfigAds.unityGameID = unityGameID ?: ""
-            ConfigAds.unityBanner = unityBanner ?: ""
-            ConfigAds.unityInter = unityInter ?: ""
-            ConfigAds.fanBanner = fanBanner ?: ""
-            ConfigAds.fanInter = fanInter ?: ""
-            ConfigAds.mopubBanner = mopubBanner ?: ""
-            ConfigAds.mopubInter = mopubInter ?: ""
-            ConfigAds.startAppId = startAppId ?: ""
-            ConfigAds.appLovinInter = appLovinInter ?: ""
-            ConfigAds.appLovinBanner = appLovinBanner ?: ""
-            ConfigAds.intervalInt = intervalInt ?: 1
-        }
+        ConfigAdsMapper.mapFromConfigAdsModel(configAdsModel)
     }
 
     fun initialize(activity: Activity) {
