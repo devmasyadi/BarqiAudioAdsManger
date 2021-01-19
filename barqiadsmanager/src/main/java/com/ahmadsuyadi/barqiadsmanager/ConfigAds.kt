@@ -5,6 +5,7 @@ object ConfigAds {
     var isShowAds = true
     var isTestAds = true
     var intervalInt = 0
+    var testDeviceID = ""
     var idBannerAdMob = ""
     var idInterstitialAdMob = ""
     var idNativeAdmob = ""
@@ -19,6 +20,7 @@ object ConfigAds {
     var mopubBanner = ""
     var mopubInter = ""
     var startAppId = ""
+    var sdkKeyAppLovin = ""
     var appLovinInter = ""
     var appLovinBanner = ""
 }

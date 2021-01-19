@@ -22,6 +22,7 @@ class AdmobAds : IAds, AnkoLogger {
         if (ConfigAds.isTestAds)
             MobileAds.setRequestConfiguration(
                 RequestConfiguration.Builder()
+                    .setTestDeviceIds(listOf(ConfigAds.testDeviceID))
                     .build()
             )
         MobileAds.initialize(activity) { info("onInitialize Admob") }

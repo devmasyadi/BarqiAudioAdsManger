@@ -1,14 +1,18 @@
 package com.ahmadsuyadi.barqiadsmanager.ads.applovin
 
 import android.app.Activity
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import com.ahmadsuyadi.barqiadsmanager.ConfigAds
+import com.ahmadsuyadi.barqiadsmanager.R
 import com.ahmadsuyadi.barqiadsmanager.ads.IAds
 import com.applovin.mediation.MaxAd
 import com.applovin.mediation.MaxAdListener
 import com.applovin.mediation.MaxAdViewAdListener
 import com.applovin.mediation.ads.MaxAdView
 import com.applovin.mediation.ads.MaxInterstitialAd
+import com.applovin.sdk.AppLovinMediationProvider
 import com.applovin.sdk.AppLovinSdk
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -27,17 +31,32 @@ class AppLovinAds : IAds, AnkoLogger {
 
     override fun initialize(activity: Activity) {
         this.activity = activity
-        AppLovinSdk.getInstance(activity).mediationProvider = "max"
+        if (ConfigAds.isTestAds)
+            AppLovinSdk.getInstance(activity).settings.testDeviceAdvertisingIds =
+                arrayListOf(ConfigAds.testDeviceID)
+        AppLovinSdk.getInstance(activity).mediationProvider = AppLovinMediationProvider.MAX
         AppLovinSdk.getInstance(activity).initializeSdk {
             info("Success initialize appLovinAds")
+            createInterstitialAd()
         }
-        createInterstitialAd()
+
+        val sdkKey = AppLovinSdk.getInstance(activity.applicationContext).sdkKey
+        val isValidSdkKey = ConfigAds.sdkKeyAppLovin.equals(sdkKey, ignoreCase = true)
+        info("isValidSdkKey: $isValidSdkKey")
     }
 
     override fun showBanner(adView: RelativeLayout) {
         val appLovinBanner = MaxAdView(ConfigAds.appLovinBanner, activity)
         appLovinBanner.setListener(bannerListener)
+
+        // Stretch to the width of the screen for banners to be fully functional
+        val width = ViewGroup.LayoutParams.MATCH_PARENT
+
+        // Banner height on phones and tablets is 50 and 90, respectively
+        val heightPx = activity.resources.getDimensionPixelSize(R.dimen.banner_height)
+        appLovinBanner.layoutParams = FrameLayout.LayoutParams(width, heightPx)
         adView.addView(appLovinBanner)
+        // Load the ad
         appLovinBanner.loadAd()
     }
 

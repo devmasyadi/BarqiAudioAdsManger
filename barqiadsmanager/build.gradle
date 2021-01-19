@@ -52,7 +52,7 @@ dependencies {
 
     implementation 'com.github.Unity-Technologies:unity-ads-android:3.5.1'
     implementation 'com.google.android.gms:play-services-ads:19.6.0'
-    implementation 'com.facebook.android:audience-network-sdk:6.1.0'
+    implementation 'com.facebook.android:audience-network-sdk:6.2.0'
     implementation 'com.startapp:inapp-sdk:4.6.3'
     implementation('com.mopub:mopub-sdk-banner:5.15.0') { transitive = true }
     implementation('com.mopub:mopub-sdk-fullscreen:5.15.0') { transitive = true }
