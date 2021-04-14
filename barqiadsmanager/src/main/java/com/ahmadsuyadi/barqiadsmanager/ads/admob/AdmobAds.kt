@@ -19,12 +19,11 @@ class AdmobAds : IAds, AnkoLogger {
     override fun initialize(activity: Activity) {
         this.activity = activity
         context = activity.applicationContext
-        if (ConfigAds.isTestAds)
-            MobileAds.setRequestConfiguration(
-                RequestConfiguration.Builder()
-                    .setTestDeviceIds(listOf(ConfigAds.testDeviceID))
-                    .build()
-            )
+        MobileAds.setRequestConfiguration(
+            RequestConfiguration.Builder()
+                .setTestDeviceIds(listOf(ConfigAds.testDeviceID))
+                .build()
+        )
         MobileAds.initialize(activity) { info("onInitialize Admob") }
         adRequest = AdRequest.Builder().build()
         mInterstitialAd = InterstitialAd(context).apply {

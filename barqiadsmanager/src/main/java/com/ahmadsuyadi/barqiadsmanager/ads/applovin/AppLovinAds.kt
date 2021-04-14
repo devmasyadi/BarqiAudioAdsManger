@@ -31,7 +31,6 @@ class AppLovinAds : IAds, AnkoLogger {
 
     override fun initialize(activity: Activity) {
         this.activity = activity
-        if (ConfigAds.isTestAds)
             AppLovinSdk.getInstance(activity).settings.testDeviceAdvertisingIds =
                 arrayListOf(ConfigAds.testDeviceID)
         AppLovinSdk.getInstance(activity).mediationProvider = AppLovinMediationProvider.MAX
